@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Android Transfer Module</string>
+    <string name="MainActivity_screen">Client List</string>
+</resources>

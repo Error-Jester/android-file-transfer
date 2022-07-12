@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'org.jetbrains.kotlin.plugin.serialization'
 }
 
 
@@ -61,10 +62,18 @@ dependencies {
     implementation "io.ktor:ktor-server-compression-jvm:2.0.3"
 
     // json parsing
-    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2'
+    implementation "io.ktor:ktor-serialization-kotlinx-json-jvm:2.0.3"
 
     // Permission Handling
     implementation 'pub.devrel:easypermissions:3.0.0'
+
+    // PartialContent
+    implementation("io.ktor:ktor-server-partial-content:2.0.3")
+    implementation "io.ktor:ktor-server-auto-head-response:2.0.3"
+
+    // Content Negotiation
+    implementation "io.ktor:ktor-server-content-negotiation-jvm:2.0.3"
+
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'

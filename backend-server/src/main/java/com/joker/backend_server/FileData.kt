@@ -1,35 +1,43 @@
 package com.joker.backend_server
 
+import android.util.Log
 import pub.devrel.easypermissions.EasyPermissions
 import pub.devrel.easypermissions.PermissionRequest
 import java.io.File
+import java.lang.Exception
 
-fun getFiles(rootFile: File): ArrayList<File> {
-    val filesList = rootFile.listFiles()
-
-    // Obtaining File Objects
-    val fileLists = ArrayList<File>()
-    for(fileObject in filesList!!) {
-        if(fileObject.isDirectory && !fileObject.isHidden) {
-            fileLists.add(fileObject)
+fun getFiles(rootFile: File = File(System.getenv("EXTERNAL_STORAGE")!!)): List<File> {
+    try {
+        val filesList = rootFile.listFiles()
+        // Obtaining File Objects
+        val fileLists = ArrayList<File>()
+        for (fileObject in filesList!!) {
+            if (fileObject.isDirectory && !fileObject.isHidden) {
+                fileLists.add(fileObject)
+            }
         }
-    }
-    for(fileObject in filesList) {
-        val fileType = fileObject.name.lowercase()
-        if(
-            fileType.endsWith(".jpeg")||
-            fileType.endsWith(".jpg")||
-            fileType.endsWith(".png")||
-            fileType.endsWith(".mp4")||
-            fileType.endsWith(".mp3")||
-            fileType.endsWith(".pdf")||
-            fileType.endsWith(".epub")||
-            fileType.endsWith(".mobi")||
-            fileType.endsWith(".html")||
-            fileType.endsWith(".js")
-        ) {
-            fileLists.add(fileObject)
+        for (fileObject in filesList) {
+            val fileType = fileObject.name.lowercase()
+            if (fileType[0] != '.') {
+                fileLists.add(fileObject)
+            }
         }
+        return fileLists.toList()
+    } catch (e: Exception) {
+        val filesList = File(System.getenv("EXTERNAL_STORAGE")!!).listFiles()
+        // Obtaining File Objects
+        val fileLists = ArrayList<File>()
+        for (fileObject in filesList!!) {
+            if (fileObject.isDirectory && !fileObject.isHidden) {
+                fileLists.add(fileObject)
+            }
+        }
+        for (fileObject in filesList) {
+            val fileType = fileObject.name.lowercase()
+            if (fileType[0] != '.') {
+                fileLists.add(fileObject)
+            }
+        }
+        return fileLists.toList()
     }
-    return fileLists
 }

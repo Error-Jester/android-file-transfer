@@ -1,39 +1,37 @@
-package com.joker.backend_server
+package com.joker.backend_server.data
 
+import android.os.Build
 import android.os.Environment
 import android.util.Log
-import pub.devrel.easypermissions.EasyPermissions
-import pub.devrel.easypermissions.PermissionRequest
+import androidx.annotation.RequiresApi
+import com.joker.backend_server.core.ServerException
 import java.io.File
 import java.lang.Exception
 
 /// obtains files and their paths
-fun getFiles(rootFile: File = Environment.getExternalStorageDirectory()): MutableList<File> {
+
+fun getFiles(rootFile: File = File(System.getenv("EXTERNAL_STORAGE")!!)): MutableList<File> {
     try {
-        val filesList = rootFile.listFiles()!!
-        val receiverList = mutableListOf<File>()
-        for(file in filesList) {
-            if(file.isDirectory){
-                receiverList.add(file)
-                continue
-            }
-            if(file.name[0] != '.'){
-                receiverList.add(file)
-            }
-        }
+        val receiverList = mutableListOf<File>(Environment.getExternalStorageDirectory())
+        rootFile.listFiles()!!.forEach { receiverList.add(it) }
+        Log.d("FILES", receiverList[0].path)
         return receiverList
+
     } catch (e: Exception) {
-        val filesList = System.getenv("EXTERNAL_STORAGE")?.let { File(it).listFiles() }!!
+        e.printStackTrace()
+        Log.e("GETFILES", e.message!!)
+        throw ServerException()
+    }
+}
+
+@RequiresApi(Build.VERSION_CODES.R)
+fun getA11Files(rootFile: File = Environment.getExternalStorageDirectory()): MutableList<File> {
+    try {
         val receiverList = mutableListOf<File>()
-        for(file in filesList) {
-            if(file.isDirectory){
-                receiverList.add(file)
-                continue
-            }
-            if(!file.name.contains(".")){
-                receiverList.add(file)
-            }
-        }
+        rootFile.listFiles()!!.forEach { receiverList.add(it) }
         return receiverList
+
+    }  catch (e: Exception) {
+        throw ServerException()
     }
 }

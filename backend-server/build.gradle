@@ -49,8 +49,9 @@ android {
 }
 dependencies {
 
+
     // Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
 
     // Embedded Server
     implementation 'io.ktor:ktor-server-core-jvm:2.0.3'

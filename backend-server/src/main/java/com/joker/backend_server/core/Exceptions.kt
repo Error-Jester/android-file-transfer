@@ -1,4 +1,7 @@
 package com.joker.backend_server.core
 
-class Exceptions {
-}
+import java.lang.Exception
+
+abstract class Exceptions: Exception()
+
+class ServerException: Exceptions()

@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'org.jetbrains.kotlin.kapt'
+    id 'org.jetbrains.kotlin.plugin.serialization'
 }
 
 android {
@@ -48,25 +49,33 @@ android {
 }
 
 dependencies {
+    // Ktor Client
+    implementation "io.ktor:ktor-client-core:2.0.3"
+    implementation "io.ktor:ktor-client-android:2.0.3"
+    implementation "io.ktor:ktor-client-serialization:2.0.3"
+    implementation "io.ktor:ktor-client-logging:2.0.3"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2"
+
+
     // Kotlin Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
 
     // Backend Server
     implementation(project(":backend-server"))
 
     // Hilt
-    implementation 'com.google.dagger:hilt-android:2.42'
-    kapt 'com.google.dagger:hilt-compiler:2.42'
+    implementation 'com.google.dagger:hilt-android:2.43'
+    kapt 'com.google.dagger:hilt-compiler:2.43'
 
     // AndroidX core
     implementation 'androidx.core:core-ktx:1.8.0'
-    implementation "androidx.compose.ui:ui:1.2.0-rc03"
+    implementation 'androidx.compose.ui:ui:1.3.0-alpha01'
 
     // Compose Material3
     implementation 'androidx.compose.material3:material3:1.0.0-alpha14'
 
     // Compose
-    implementation "androidx.compose.ui:ui-tooling-preview:1.2.0-rc03"
+    implementation 'androidx.compose.ui:ui-tooling-preview:1.3.0-alpha01'
     implementation 'androidx.activity:activity-compose:1.5.0'
     implementation "androidx.compose.foundation:foundation:1.1.1"
     implementation "androidx.compose.foundation:foundation-layout:1.1.1"
@@ -84,7 +93,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     // Compose Testing
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:1.2.0-rc03"
-    debugImplementation "androidx.compose.ui:ui-tooling:1.2.0-rc03"
-    debugImplementation "androidx.compose.ui:ui-test-manifest:1.2.0-rc03"
+    androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.3.0-alpha01'
+    debugImplementation 'androidx.compose.ui:ui-tooling:1.3.0-alpha01'
+    debugImplementation 'androidx.compose.ui:ui-test-manifest:1.3.0-alpha01'
 }

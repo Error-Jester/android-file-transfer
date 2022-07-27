@@ -1,4 +1,4 @@
-package com.joker.androidfiletransfer.Presentation.ui.theme
+package com.joker.androidfiletransfer.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
